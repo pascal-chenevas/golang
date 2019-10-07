@@ -1,0 +1,61 @@
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+type Animal struct {
+	food, locomotion, noise string
+}
+
+func (a Animal) Eat() {
+	fmt.Println("I eat ", a.food)
+}
+
+func (a Animal) Move() {
+	fmt.Println("I ", a.locomotion)
+}
+
+func (a Animal) Speak() {
+	fmt.Println("I ", a.noise)
+}
+
+func main() {
+
+	cow := Animal{"grass", "walk", "moo"}
+	bird := Animal{"worms", "fly", "peep"}
+	snake := Animal{"mice", "slither", "hsss"}
+
+	var animalChosen Animal
+	var animalName, informationRequested string
+
+	fmt.Print("> ")
+	_, err := fmt.Scanf("%s %s", &animalName, &informationRequested)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	if animalName == "cow" {
+		animalChosen = cow
+	} else if animalName == "bird" {
+		animalChosen = bird
+	} else if animalName == "snake" {
+		animalChosen = snake
+	} else {
+		fmt.Println("animal name '", animalName, "' not allowed! Allowed: cow/bird/snake ")
+		os.Exit(0)
+	}
+
+	if informationRequested == "eat" {
+		animalChosen.Eat()
+	} else if informationRequested == "move" {
+		animalChosen.Move()
+	} else if informationRequested == "speak" {
+		animalChosen.Speak()
+	} else {
+		fmt.Println("request '", informationRequested, "' not supported! Allowed: eat/move/speak")
+		os.Exit(0)
+	}
+}
