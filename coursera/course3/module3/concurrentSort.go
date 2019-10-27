@@ -27,22 +27,17 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 
 	numberArray := 4
-	var slices [][]int
+	slices := make([][]int, 4)
 	result := []int{}
 
 	ch := make(chan []int)
 
-	fmt.Print("> (Enter a list of integer sparated by space): ")
+	fmt.Print("> (Enter a list of integer - minimum 7 ints - sparated by space): ")
 	input, _ := reader.ReadString('\n')
 	input = strings.Trim(input, "\n")
 	input = strings.ToLower(input)
 
 	sli := StringSliceToStringInt(strings.Split(input, " "))
-
-	if len(sli) < numberArray {
-		fmt.Println("Please enter a minimum of 4 int")
-		os.Exit(0)
-	}
 
 	//fmt.Println(sli)
 	chunkSize := (len(sli) + numberArray - 1) / numberArray
@@ -56,7 +51,14 @@ func main() {
 		slices = append(slices, sli[i:end])
 	}
 
-	for i := 0; i < numberArray; i++ {
+	slices = slices[4:]
+	//fmt.Println(slices)
+	if len(slices) < 4 {
+		fmt.Println("only ", len(slices), " subarray can be built from your list: ", slices)
+		os.Exit(0)
+	}
+
+	for i := 0; i < len(slices); i++ {
 		go func(sli []int, i int, ch chan<- []int) {
 			sort.Sort(sort.IntSlice(sli))
 			fmt.Println("sorted subarray #", i, sli)
