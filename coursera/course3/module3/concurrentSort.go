@@ -30,21 +30,25 @@ func main() {
 	var slices [][]int
 	result := []int{}
 
-	ch := make(chan []int, 4)
+	ch := make(chan []int)
 
-	fmt.Print("> (Enter a list of integer): ")
+	fmt.Print("> (Enter a list of integer sparated by space): ")
 	input, _ := reader.ReadString('\n')
 	input = strings.Trim(input, "\n")
 	input = strings.ToLower(input)
 
 	sli := StringSliceToStringInt(strings.Split(input, " "))
 
+	if len(sli) < numberArray {
+		fmt.Println("Please enter a minimum of 4 int")
+		os.Exit(0)
+	}
+
 	//fmt.Println(sli)
 	chunkSize := (len(sli) + numberArray - 1) / numberArray
 
 	for i := 0; i < len(sli); i += chunkSize {
 		end := i + chunkSize
-
 		if end > len(sli) {
 			end = len(sli)
 		}
