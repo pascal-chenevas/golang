@@ -30,15 +30,7 @@ func main() {
 	var slices [][]int
 	result := []int{}
 
-	ch1 := make(chan []int)
-	ch2 := make(chan []int)
-	ch3 := make(chan []int)
-	ch4 := make(chan []int)
-
-	var subArray1 []int
-	var subArray2 []int
-	var subArray3 []int
-	var subArray4 []int
+	ch := make(chan []int, 4)
 
 	fmt.Print("> (Enter a list of integer): ")
 	input, _ := reader.ReadString('\n')
@@ -60,40 +52,17 @@ func main() {
 		slices = append(slices, sli[i:end])
 	}
 
-	if len(slices) < 4 {
-		fmt.Println("Pleaser enter more number because with your list I can make less subarray than 4")
-		os.Exit(0)
+	for i := 0; i < numberArray; i++ {
+		go func(sli []int, i int, ch chan<- []int) {
+			sort.Sort(sort.IntSlice(sli))
+			fmt.Println("sorted subarray #", i, sli)
+			ch <- sli
+		}(slices[i], i, ch)
 	}
-	//fmt.Println(slices)
-	go func(sli []int) {
-		sort.Sort(sort.IntSlice(sli))
-		fmt.Println("sorted subarray #1", sli)
-		ch1 <- sli
-	}(slices[0])
 
-	go func(sli []int) {
-		sort.Sort(sort.IntSlice(sli))
-		fmt.Println("sorted subarray #2", sli)
-		ch2 <- sli
-	}(slices[1])
-
-	go func(sli []int) {
-		sort.Sort(sort.IntSlice(sli))
-		fmt.Println("sorted subarray #3", sli)
-		ch3 <- sli
-	}(slices[2])
-
-	go func(sli []int) {
-		sort.Sort(sort.IntSlice(sli))
-		fmt.Println("sorted subarray #4", sli)
-		ch4 <- sli
-	}(slices[3])
-
-	subArray1, subArray2, subArray3, subArray4 = <-ch1, <-ch2, <-ch3, <-ch4
-	result = append(result, subArray1...)
-	result = append(result, subArray2...)
-	result = append(result, subArray3...)
-	result = append(result, subArray4...)
+	for i := 0; i < numberArray; i++ {
+		result = append(result, <-ch...)
+	}
 
 	fmt.Println("====== result (sorted array) =====")
 	sort.Sort(sort.IntSlice(result))
