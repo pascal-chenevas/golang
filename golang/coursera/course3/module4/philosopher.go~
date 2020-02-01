@@ -1,0 +1,78 @@
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+type ChopS struct {
+	sync.Mutex
+}
+
+type Philosopher struct {
+	number          int
+	leftCs, rightCs *ChopS
+}
+
+func (p Philosopher) GetNumber() int {
+	return p.number
+}
+
+func (p Philosopher) Eat(wg *sync.WaitGroup) {
+	for i := 1; i <= 3; i++ {
+		p.leftCs.Lock()
+		p.rightCs.Lock()
+		fmt.Println("starting to eat <", p.number, ">")
+		fmt.Println("Finishing eating <", p.number, ">")
+		p.leftCs.Unlock()
+		p.rightCs.Unlock()
+		time.Sleep(time.Second)
+	}
+	wg.Done()
+
+}
+
+func NewPhilospher(number int, leftCs, rightCs *ChopS) Philosopher {
+	var p Philosopher
+
+	p.number = number
+	p.leftCs = leftCs
+	p.rightCs = rightCs
+
+	return p
+}
+
+func createChops() []*ChopS {
+	CSticks := make([]*ChopS, 5)
+	for i := 0; i < 5; i++ {
+		CSticks[i] = new(ChopS)
+	}
+	return CSticks
+}
+
+func createPhilosophers() []Philosopher {
+
+	var philos []Philosopher
+
+	CSticks := createChops()
+	for i := 0; i < 5; i++ {
+		philos = append(philos, NewPhilospher(i, CSticks[i], CSticks[(i+1)%5]))
+	}
+
+	return philos
+}
+
+func main() {
+
+	philos := createPhilosophers()
+	var wg sync.WaitGroup
+
+	for i := 0; i < 5; i++ {
+		wg.Add(1)
+		go philos[i].Eat(&wg)
+	}
+
+	wg.Wait()
+	fmt.Println("All philosophers finsihed")
+}

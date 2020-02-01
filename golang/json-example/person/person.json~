@@ -1,0 +1,65 @@
+[
+  {
+    "_id": "5c6996d7958acf9359b3b316",
+    "index": 0,
+    "guid": "65c4f16e-4dd3-4e4c-9f96-e74f3d9258cc",
+    "isActive": false,
+    "balance": "$3,259.50",
+    "picture": "http://placehold.it/32x32",
+    "age": 30,
+    "eyeColor": "brown",
+    "firstname": "Estes",
+    "lastname": "Puckett"
+  },
+  {
+    "_id": "5c6996d7de4a130dd7728a71",
+    "index": 1,
+    "guid": "68d4f06b-1d99-4789-ad98-ce87d0d8689d",
+    "isActive": true,
+    "balance": "$1,324.03",
+    "picture": "http://placehold.it/32x32",
+    "age": 31,
+    "eyeColor": "green",
+    "firstname": "Esperanza",
+    "lastname": "Stevens"
+  },
+  {
+    "_id": "5c6996d70f848e0508eeaa49",
+    "index": 2,
+    "guid": "1de3faac-23eb-4ac2-a288-c26e0aca279a",
+    "isActive": true,
+    "balance": "$3,644.14",
+    "picture": "http://placehold.it/32x32",
+    "age": 21,
+    "eyeColor": "blue",
+    "name": {
+      "first": "Rios",
+      "last": "West"
+    },
+  },
+  {
+    "_id": "5c6996d787a7d2460bf6790c",
+    "index": 3,
+    "guid": "418e642d-98f4-41d7-8269-baf46e373f5f",
+    "isActive": false,
+    "balance": "$2,438.28",
+    "picture": "http://placehold.it/32x32",
+    "age": 37,
+    "eyeColor": "blue",
+    "firstname": "Preston",
+    "lastname": "Henry"
+  },
+  {
+    "_id": "5c6996d784d5ba75532b1197",
+    "index": 4,
+    "guid": "0ecd38a8-31b5-4e90-b5af-3847b3cbd815",
+    "isActive": false,
+    "balance": "$3,776.31",
+    "picture": "http://placehold.it/32x32",
+    "age": 21,
+    "eyeColor": "green",
+    "firstname": "Janine",
+    "lastname": "Dalton"
+  }
+ 
+]
