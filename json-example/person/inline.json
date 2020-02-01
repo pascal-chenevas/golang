@@ -1,6 +1,0 @@
-{ "step" : null, "tags": null, "keyValues": ["runID", "erwerwe-156rw87rwe"]}
-{ "step" : "a", "tags": ["create"], "keyValues": ["abcd", "efg"]}
-{ "step" : "b", "tags": ["ignore"], "keyValues": ["eeee", "1"]}
-{ "step" : "c", "tags": ["cancel", "notExists"], "keyValues": ["gggg", "2"]}
-{ "step" : "d", "tags": ["update"], "keyValues": ["ffff", "3"]}
-{ "step" : "e", "tags": ["failed"], "keyValues": ["xxxx", "4"]}
